@@ -80,13 +80,15 @@ const TTuKuToKKuTu = (words: TTuKuWord[]): KKuTuWord[] => {
 
     const w = kWords[name]
 
+    if(word.wordClass === TTuKuWordClass.Phrase) word.wordClass = TTuKuWordClass.Noun
+
     // 단어가 없는 경우 생성
     if(!w) {
       kWords[name] = {
         type: repeatArray(word.wordClass, wordDupNum),
         mean: "＂1＂［1］（1）" + word.definition,
         hit: 0,
-        flag: 0,
+        flag: word.reference === "urimalsam" ? 0 : 2,
         theme: word.tags.length ? word.tags : ["0"]
       } as KKuTuWordValue
       continue
@@ -96,6 +98,8 @@ const TTuKuToKKuTu = (words: TTuKuWord[]): KKuTuWord[] => {
     w.type.push(...repeatArray(word.wordClass, wordDupNum))
     w.mean += ("＂1＂［1］（1）" + word.definition).repeat(wordDupNum)
     w.theme.push(...(word.tags.length ? word.tags : ["0"]))
+
+    if (word.reference === 'urimalsam') w.flag = 0;
 
   }
 
