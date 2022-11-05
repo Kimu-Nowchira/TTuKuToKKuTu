@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "knex": "^2.3.0",
-    "mongodb": "^4.11.0"
+    "mongodb": "^4.11.0",
+    "pg": "^8.8.0"
   }
 }
